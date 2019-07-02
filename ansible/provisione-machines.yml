@@ -1,0 +1,33 @@
+---
+- hosts: docker-servers
+  gather_facts: yes
+  remote_user: root
+
+  tasks:
+   
+  - name: Add user a new user and generate ssh keys.
+    user: 
+      name: 'root'
+      generate_ssh_key: yes
+      ssh_key_type: 'ed25519'
+  - name: Install prerequisites
+    apt:
+      name: ['apt-transport-https','ca-certificates','curl','gnupg2','software-properties-common']
+      update_cache: yes
+
+  - name: Add Docker GPG key
+    apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+
+  - name: Add Docker APT repository
+    apt_repository:
+            repo: deb [arch=amd64] https://download.docker.com/linux/{{ansible_distribution|lower}} {{ansible_distribution_release}} stable
+
+  - name: Install Docker
+    apt:
+            name: docker-ce
+            update_cache: yes
+  handlers:
+    - name: restart ssh
+      service:
+        name=sshd
+        state=restarted
