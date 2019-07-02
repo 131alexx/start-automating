@@ -9,7 +9,7 @@ To start on DevOps, you need machines to provision, so you can see the paralelis
   - Ansible
 ## Install
 
-###### Docker
+### Docker
 
 First of all, we need the docker image we are going to uses to deploy our servers, it is based on this docker image 'rastasheep/ubuntu-sshd:18.04' so I recommend to pull that images
 
@@ -17,10 +17,10 @@ First of all, we need the docker image we are going to uses to deploy our server
 docker pull rastasheep/ubuntu-sshd:18.04
 ```
 
-Based on that image we are going to build the one that we are going to use:
+Based on that image we are going to build the one that we are going to use.
 Pick your favorite text editor and modify some parameters:
  - 9th line: put the user:passsword you want for your non root user
- - 17 & 18 line: Put the public key you are going to use to login to your machines with ssh
+ - 17th & 18th line: Put the public key you are going to use to login to your machines with ssh
 
 Once you have this, we can build our image using 
 ```
@@ -39,7 +39,7 @@ ip a | grep NETWORK ID | grep inet
 
 ```
 
-###### Ansible
+### Ansible
 
 With ansible you need to edit your /etc/ansible/hosts file and add the network of your docker machines you are going to provision, in my case:
 ```
@@ -67,7 +67,7 @@ To delete a single server you can use:
 scripts/delete-server.sh N
 ```
 where N is the number of the server you want to delete.
-You can algo use it without parameters to delete all servers
+You can algo use it without parameters to delete all servers:
 ```
 scripts/delete-server.sh
 ```
