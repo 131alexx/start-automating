@@ -26,6 +26,14 @@
     apt:
             name: docker-ce
             update_cache: yes
+
+  - name: Update git Repository
+    git:    
+      repo: 'https://github.com/131alexx/cv-webpage'
+      dest: /srv/git
+      version: 'develop'
+
+        
   handlers:
     - name: restart ssh
       service:
